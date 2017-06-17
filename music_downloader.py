@@ -9,5 +9,23 @@
 ###################################################################################
 
 
-import scrapy
+import mechanize
+import taglib
+import json
+import sys
+
+TARGET_SONGS = sys.argv[1]
+
+br = mechanize.Browser()
+
+br.open('http://clipconverter.cc')
+br.select_form(id='converter')
+mediaurl = br.form.find_control(name='mediaurl')
+mediaurl.value = 'https://www.youtube.com/watch?v=ZiXQG6A4itE'
+res = br.submit()
+
+print TARGET_SONGS
+song = taglib.File('blank.mp3')
+print song.tags
+
 

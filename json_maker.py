@@ -12,6 +12,9 @@ import sys
 from types import DictType, ListType
 import json
 
+OBJECT_ALIAS = ['object', 'song', 's']
+ARRAY_ALIAS = ['array']
+
 class JsonMaker(object):
     def __init__(self, file_name, init_type):
         self.file_name = file_name
@@ -20,7 +23,7 @@ class JsonMaker(object):
     def return_scope(self, object_type):
         if object_type == 'object':
             return {}
-        if object_type == 'array':
+        elif object_type == 'array':
             return []
         else:
             return None
@@ -42,12 +45,12 @@ class JsonMaker(object):
             if type(cur_scope) == DictType:
                 if len(input_data) < 2:
                     print 'Object entries must follow [KEY]: [VALUE]'
-                elif input_data[1] == 'object':
+                elif input_data[1] in OBJECT_ALIAS:
                     self.add_elem(
                             cur_scope, 
                             input_data[0], 
                             self.generate_json(input_data[0], 'object'))
-                elif input_data[1] == 'array':
+                elif input_data[1] in ARRAY_ALIAS:
                     self.add_elem(
                             cur_scope, 
                             input_data[0], 
@@ -55,12 +58,12 @@ class JsonMaker(object):
                 else:
                     self.add_elem(cur_scope, input_data[0], input_data[1])
             elif type(cur_scope) == ListType:
-                if input_data[0] == 'object':
+                if input_data[0] in OBJECT_ALIAS:
                     self.add_elem(
                             cur_scope, 
                             None, 
                             self.generate_json('{}[]'.format(scope_name), 'object'))
-                elif input_data[0] == 'array':
+                elif input_data[0] == ARRAY_ALIAS:
                     self.add_elem(
                             cur_scope, 
                             None, 

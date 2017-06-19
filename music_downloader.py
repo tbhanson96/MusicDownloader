@@ -14,18 +14,23 @@ import taglib
 import json
 import sys
 
-TARGET_SONGS = sys.argv[1]
+#TARGET_SONGS = sys.argv[1]
+CONVERTER_URL = 'http://www.youtubeinmp3.com'
+FORM_NAME = 'form'
+URL_ELEMENT = 'video'
+SUBMIT_ELEMENT = 'submit'
+songname = 'https://www.youtube.com/watch?v=kffacxfA7G4'
 
 br = mechanize.Browser()
 
-br.open('http://clipconverter.cc')
-br.select_form(id='converter')
-mediaurl = br.form.find_control(name='mediaurl')
-mediaurl.value = 'https://www.youtube.com/watch?v=ZiXQG6A4itE'
+br.open(CONVERTER_URL)
+br.select_form(id=FORM_NAME)
+mediaurl = br.form.find_control(id=URL_ELEMENT)
+mediaurl.value = songname
 res = br.submit()
 
-print TARGET_SONGS
-song = taglib.File('blank.mp3')
-print song.tags
+print res.read()
+
+
 
 

@@ -74,7 +74,8 @@ def tag_media(media_file_name, cover_file_name, tag_dict):
         media_file.add_tags()
     media_file.tags.add(TIT2(encoding=3, text=tag_dict['title']))
     media_file.tags.add(TPE1(encoding=3, text=tag_dict['artist']))
-    media_file.tags.add(TALB(encoding=3, text=tag_dict['title']))
+    album_tag = (tag_dict['album'] if tag_dict.has_key('album') else tag_dict['title']+' - single')
+    media_file.tags.add(TALB(encoding=3, text=album_tag))
     
     media_file.tags.add(APIC(
                     encoding=3,

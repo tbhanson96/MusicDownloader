@@ -1,5 +1,7 @@
 # MusicDownloader
 
+Now broken. Website used for downloads was taken down.
+
 ### Author:
 Tim Hanson                                                                                                                                
 ### Description:

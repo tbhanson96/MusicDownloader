@@ -1,3 +1,5 @@
+Currently broken :(
+
 # MusicDownloader
 
 Now broken. Website used for downloads was taken down.
